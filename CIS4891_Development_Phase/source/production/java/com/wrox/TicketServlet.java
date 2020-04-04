@@ -53,6 +53,9 @@ public class TicketServlet extends HttpServlet
             case "view":
                 this.viewTicket(request, response);
                 break;
+            case "retire":
+                this.retireTicket(request, response);
+                break;
             case "download":
                 this.downloadAttachment(request, response);
                 break;
@@ -113,6 +116,24 @@ public class TicketServlet extends HttpServlet
         request.getRequestDispatcher("/WEB-INF/jsp/view/viewTicket.jsp")
                .forward(request, response);
     }
+    
+    private void retireTicket(HttpServletRequest request,
+				            HttpServletResponse response)
+				throws ServletException, IOException
+	{
+		String idString = request.getParameter("ticketId");
+		Ticket ticket = this.getTicket(idString, response);
+		if(ticket == null)
+		return;
+		
+		ticket.setisRetired(!ticket.getisRetired());
+		
+
+		request.setAttribute("ticketDatabase", this.ticketDatabase);
+
+        request.getRequestDispatcher("/WEB-INF/jsp/view/listTickets.jsp")
+                .forward(request, response);
+	}
 
     private void downloadAttachment(HttpServletRequest request,
                                     HttpServletResponse response)
@@ -144,6 +165,8 @@ public class TicketServlet extends HttpServlet
         ServletOutputStream stream = response.getOutputStream();
         stream.write(attachment.getContents());
     }
+    
+    
 
     private void listTickets(HttpServletRequest request,
                              HttpServletResponse response)
@@ -165,9 +188,10 @@ public class TicketServlet extends HttpServlet
                 (String)request.getSession().getAttribute("username")
         );
         ticket.setSubject(request.getParameter("subject"));
-        ticket.setBody(request.getParameter("body"));
+        ticket.setDescription(request.getParameter("description"));
         ticket.setPrice(request.getParameter("price"));
         ticket.setQuantity(request.getParameter("quantity"));
+        ticket.setisRetired(false);
 
         Part filePart = request.getPart("file1");
         if(filePart != null && filePart.getSize() > 0)

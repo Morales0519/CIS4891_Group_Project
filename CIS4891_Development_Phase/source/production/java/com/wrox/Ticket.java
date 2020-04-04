@@ -17,9 +17,9 @@ public class Ticket
     
     private String quantity;
     
-    private String arrivalDate;
+    private boolean isRetired;
     
-    private String departureDate;
+    private String description;
     ////////////////////////////////////////////////
 
     private Map<String, Attachment> attachments = new LinkedHashMap<>();
@@ -46,24 +46,24 @@ public class Ticket
     	this.quantity = quantity;
     }
     //Get and set arrival date
-    public String getArrivalDate()
+    public boolean getisRetired()
     {
-    	return arrivalDate;
+    	return isRetired;
     }
     
-    public void setArrivalDate(String arrivalDate)
+    public void setisRetired(boolean isRetired)
     {
-    	this.arrivalDate = arrivalDate;
+    	this.isRetired = isRetired;
     }
     //Get and set departure date
-    public String getDepartureDate()
+    public String getDescription()
     {
-    	return departureDate;
+    	return description;
     }
     
-    public void setDepartureDate(String departureDate)
+    public void setDescription(String description)
     {
-    	this.departureDate = departureDate;
+    	this.description = description;
     }
     ///////////////////////////////////////////////
     public String getCustomerName()

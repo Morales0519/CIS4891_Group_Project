@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Berry's Bed and Breakfast</title>
+        <title>DRS Warehousing</title>
         <style>
         * {
         	box-sizing: border-box;
@@ -62,10 +62,14 @@
             
             <b>Item Name</b><br/>
             <input type="text" name="subject" placeholder="DDR4 16 GB RAM" required><br/><br/>
+            <b>Item Description</b><br/>
+            <input type="text" name="description" placeholder="A component for building computers" required><br/><br/>
             <b>Price</b><br/>
-            <input type="text" name="price" placeholder="$100" required><br/><br/>
+            <input type="number" name="price" placeholder="$100" min="0" required><br/><br/>
             <b>Quantity</b><br/>
-            <input type="text" name="quantity" placeholder="1000" required><br/><br/>
+            <input type="number" name="quantity" placeholder="1000" min="0" required><br/><br/>
+            <b>Image</b>
+            <input type="file" name="file1" multiple accept='image/*' required><br/><br/>
             <input type="submit" value="Submit"/>
         </form>
         </div>
